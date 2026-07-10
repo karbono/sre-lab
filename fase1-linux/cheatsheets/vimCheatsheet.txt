@@ -1,0 +1,10 @@
+gg -> go to the top of the document
+G  -> go to the end of the document
+/text -> search for "text"
+?text -> search backwards for "text"
+^  -> move to start of a line
+$  -> move to end of a line
+w  -> move to the next word
+e  -> move to the end of the current word
+:%s/old/new/g -> substitute all occurrences of "old" with "new"
+b  -> go back to the start of the previous word
