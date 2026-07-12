@@ -30,7 +30,7 @@
 - ls -> enlaces simbólicos.
 
 ### Examples
-```[root@rhel-control loren]# cp /etc/hosts ./hosts
+```[root@rhel-control loren]# cp /etc/hosts ./hosts 
 [root@rhel-control loren]# ln hosts hard
 [root@rhel-control loren]# ls -il hosts hard
 25804877 -rw-r--r--. 2 root root 384 Jul 12 16:55 hard
