@@ -29,8 +29,22 @@
 - ln -> enlaces duros o "hard links". 
 - ls -> enlaces simbólicos.
 
+### Examples
+- [root@rhel-control loren]# cp /etc/hosts ./hosts
+[root@rhel-control loren]# ln hosts hard
+[root@rhel-control loren]# ls -il hosts hard
+25804877 -rw-r--r--. 2 root root 384 Jul 12 16:55 hard
+25804877 -rw-r--r--. 2 root root 384 Jul 12 16:55 hosts
+[root@rhel-control loren]# echo hello >> hard
+[root@rhel-control loren]# ls -il hosts hard
+25804877 -rw-r--r--. 2 root root 390 Jul 12 16:55 hard
+25804877 -rw-r--r--. 2 root root 390 Jul 12 16:55 hosts
+
+En este caso copiamos el fichero hosts, creamos el "hard link" hacia hard, y al hacer un echo y aumentar su tamaño, comprobamos que ambos ficheros tienen el mismo inode (25804877) y el mismo tamaño de fichero (390). 
+
 ## Lo que me ha costado
-- Diferencias entre ln y ls: 
+- Diferencias entre ln y ls: un "hard link" es un segundo nombre que apunta a un mismo inodo. Los inodos apuntan a un bloque del fichero almacenando información vital del fichero, a excepción del nombre y su contenido. Este, conecta el nombre del fichero con los bloques de datos que se ven en el disco duro. Cada fichero o carpeta tendrá un inodo único.
+- Los hard links no pueden ser usados sobre directorios, son como accesos directos para ficheros. Apuntan todos al mismo fichero único desde otra ruta, de esta forma puedes tener el mismo fichero en varios sitios, modificando solo el original.
 
 ## Conexión con mi homelab
 - "esto es lo que pasa cuando hago X en mis LXC"
