@@ -45,7 +45,4 @@ En este caso copiamos el fichero hosts, creamos el "hard link" hacia hard, y al 
 
 ## Lo que me ha costado
 - Diferencias entre ln y ls: un "hard link" es un segundo nombre que apunta a un mismo inodo. Los inodos apuntan a un bloque del fichero almacenando información vital del fichero, a excepción del nombre y su contenido. Este, conecta el nombre del fichero con los bloques de datos que se ven en el disco duro. Cada fichero o carpeta tendrá un inodo único.
-- Los hard links no pueden ser usados sobre directorios, son como accesos directos para ficheros. Apuntan todos al mismo fichero único desde otra ruta, de esta forma puedes tener el mismo fichero en varios sitios, modificando solo el original. Además, si borras el fichero principal, el segundo seguirá existiendo, ya que el hard link apunta al bloque de ficheros del disco.
-- Por otro lado, los soft links apuntan a un nombre, por ej:
-
-    - Si tenemos el fichero text.txt y hacemos "ln -s text.txt fichero.txt", lo que estaremos haciendo es un "acceso directo" al nombre text.txt desde fichero.txt, y si el fichero text.txt se elimina o se mueve de directorio, perderemos el enlace.
+- Los hard links no pueden ser usados sobre directorios, son como accesos directos para ficheros. Apuntan todos al mismo fichero único desde otra ruta, de esta forma puedes tener el mismo fichero en varios sitios, modificando solo el original.
