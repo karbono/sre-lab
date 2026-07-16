@@ -1,24 +1,30 @@
-# Semana 1 · Cap 5 — Understanding bash shell
+# Semana 2 · Cap 6 — Archiving files
 
 ## Conceptos clave
-- Uso de .bashrc y .bash_profile para añadir alias y variables de forma permanente
-- Uso de tuberías (pipes)
-- Terminado vimtutor (repasar)
+- tar se utiliza para extraer, comprimir y listar ficheros.
 
 ## Comandos nuevos
-- man file-hierarchy -> muestra la jerarquía de ficheros de Linux y su explicación de cada directorio (muy útil)
+- tar -cvf my_archive.tar /home /etc
+    - De esta forma haremos que 'my_archive.tar' contenga '/home' y '/etc' en su interior.
+- tar -tvf my_archive.tar
+    - Lista el contenido del fichero.
+- tar -xvf my_archive 
+    - Extrae el contenido en el directorio actual, podemos añadir '-C' para cambiar el directorio final.
+- Para comprimir, utilizaremos '-z', '-j' o '-J', para los diferentes tipos: gzip, bzip2 o xz respectivamente.
 
-## Lo que me ha costado
-- Diferenciar entre .bashrc y .bash_profile (repasar esta parte video 5.8)
-
-# Semana 1 · Cap 6 — Exploring filesystem hierarchy
+# Semana 2 · Cap 7 — Exploring common text tools
 
 ## Conceptos clave
-- /usr contiene /bin y /sbin, bin almacena los ficheros ejecutables por usuarios normales mientras que en sbin se almacenan los ejecutables que requieren privilegios de administrador
-- /var almacena ficheros creados dinámicamente, como por ejemplo ficheros de registro: /var/log
-- /etc es para ficheros de configuración, son escritos en texto plano y legibles 
-- /boot contiene el kernel y el resto de requerimientos para arrancar el sistema
-- /dev aquí encontramos los ficheros de interfaz de dispositivo, tales como el disco duro primario, en este caso nvme0n1:
+- cut -> filtra la salida.
+    - cut -d : -f 1 /etc/passwd 
+        - En este caso el '-d' indica que el delimitador son los dos puntos (:), '-f 1' indica el campo que quieres ver, y después la ruta del fichero a filtrar.
+- sort -> ordena la salida
+    - cut -d : -f 1 /etc/passwd | sort
+    - sort -t : -k3n /etc/passwd
+        - '-t :' define el delimitador, '-k3' indica la clave a ordenador: en este caso la columna 3 (UID). Por último, la 'n' indica que sea un ordenamiento numérico, ya que 'sort' por defecto ordena de forma alfabética.
+- tr -> convierte carácteres de minúsculas a mayúsculas por ej:
+    - echo hello | tr [:lower:] [:upper:]
+        - Interesante sobre todo en scripts, para poder convertir texto que necesitemos recoger a minúsculas o mayúsculas independientemente de cómo se ha ya insertado.
 
 ## Comandos nuevos
 - which -> busca binarios en $PATH
