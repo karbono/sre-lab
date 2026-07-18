@@ -27,11 +27,11 @@
         - Interesante sobre todo en scripts, para poder convertir texto que necesitemos recoger a minúsculas o mayúsculas independientemente de cómo se ha ya insertado.
 - grep -> filtra la salida por lo que le indiquemos, por ej:
     - ps aux | grep ssh
-        - lo que hará es devolvernos el resultado: ``[loren@rhel-control ~]$ ps aux | grep ssh
+        - lo que hará es devolvernos el resultado: ```[loren@rhel-control ~]$ ps aux | grep ssh
 root        5871  0.0  0.3   8788  6360 ?        Ss   Jul04   0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
 root       64730  0.5  0.5  15340 10404 ?        Ss   09:29   0:00 sshd-session: loren [priv]
 loren      64753  0.0  0.4  15568  7828 ?        S    09:29   0:00 sshd-session: loren@pts/0
-loren      64785  0.0  0.1   6396  2112 pts/0    S+   09:29   0:00 grep --color=auto ssh``
+loren      64785  0.0  0.1   6396  2112 pts/0    S+   09:29   0:00 grep --color=auto ssh```
 
 ## Comandos nuevos
 
