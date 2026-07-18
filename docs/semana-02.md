@@ -25,30 +25,13 @@
 - tr -> convierte carácteres de minúsculas a mayúsculas por ej:
     - echo hello | tr [:lower:] [:upper:]
         - Interesante sobre todo en scripts, para poder convertir texto que necesitemos recoger a minúsculas o mayúsculas independientemente de cómo se ha ya insertado.
+- grep -> filtra la salida por lo que le indiquemos, por ej:
+    - ps aux | grep ssh
+        - lo que hará es devolvernos el resultado: ``[loren@rhel-control ~]$ ps aux | grep ssh
+root        5871  0.0  0.3   8788  6360 ?        Ss   Jul04   0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root       64730  0.5  0.5  15340 10404 ?        Ss   09:29   0:00 sshd-session: loren [priv]
+loren      64753  0.0  0.4  15568  7828 ?        S    09:29   0:00 sshd-session: loren@pts/0
+loren      64785  0.0  0.1   6396  2112 pts/0    S+   09:29   0:00 grep --color=auto ssh``
 
 ## Comandos nuevos
-- which -> busca binarios en $PATH
-- locate -> usa una base de datos, construida por updatedb (el paquete no estaba instalado)
-- find -> `find / -type f -size +100M` busca ficheros en la raiz (/) con tamaño superior a 100MBytes
-- `mkdir -p find/contents; sudo find /etc -exec grep -l loren {} \; -exec cp {} find/contents/ \; 2>/dev/null` primero creará la carpeta find/contents, seguido buscará en el directorio /etc por la palabra "loren" y copiará el resultado a find/contents obviando los errores mediante 2>/dev/null. En este caso escapamos el segundo -exec con la contrabarra (\) para que cierre esa ejecución, y así poder utilizar otro exec en el mismo comando
-- `sudo sh -c "find /etc/ -name '*' -type f | xargs grep 127.0.0.1"` en este caso xargs toma la salida estándar del comando find y nos permite ejecutar otro comando sobre esa salida, en este caso grep para filtrar que incluya ese texto en los ficheros a buscar
-- ln -> enlaces duros o "hard links". 
-- ls -> enlaces simbólicos.
 
-### Examples
-```[root@rhel-control loren]# cp /etc/hosts ./hosts 
-[root@rhel-control loren]# ln hosts hard
-[root@rhel-control loren]# ls -il hosts hard
-25804877 -rw-r--r--. 2 root root 384 Jul 12 16:55 hard
-25804877 -rw-r--r--. 2 root root 384 Jul 12 16:55 hosts
-[root@rhel-control loren]# echo hello >> hard
-[root@rhel-control loren]# ls -il hosts hard
-25804877 -rw-r--r--. 2 root root 390 Jul 12 16:55 hard
-25804877 -rw-r--r--. 2 root root 390 Jul 12 16:55 hosts
-```
-
-En este caso copiamos el fichero hosts, creamos el "hard link" hacia hard, y al hacer un echo y aumentar su tamaño, comprobamos que ambos ficheros tienen el mismo inode (25804877) y el mismo tamaño de fichero (390). 
-
-## Lo que me ha costado
-- Diferencias entre ln y ls: un "hard link" es un segundo nombre que apunta a un mismo inodo. Los inodos apuntan a un bloque del fichero almacenando información vital del fichero, a excepción del nombre y su contenido. Este, conecta el nombre del fichero con los bloques de datos que se ven en el disco duro. Cada fichero o carpeta tendrá un inodo único.
-- Los hard links no pueden ser usados sobre directorios, son como accesos directos para ficheros. Apuntan todos al mismo fichero único desde otra ruta, de esta forma puedes tener el mismo fichero en varios sitios, modificando solo el original.
