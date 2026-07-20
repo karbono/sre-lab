@@ -35,7 +35,33 @@ root       64730  0.5  0.5  15340 10404 ?        Ss   09:29   0:00 sshd-session:
 loren      64753  0.0  0.4  15568  7828 ?        S    09:29   0:00 sshd-session: loren@pts/0
 loren      64785  0.0  0.1   6396  2112 pts/0    S+   09:29   0:00 grep --color=auto ssh
 ```
-        - Y
+        - Y en esta ocasión aparece también el propio comando grep ya que lo acabamos de usar, para evitar esto podríamos añadir "| grep -v grep" y el resultado sería:
+
+```
+[root@rhel-control loren]# ps aux | grep ssh | grep -v grep
+root        5871  0.0  0.3   8788  6360 ?        Ss   Jul04   0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root       72663  0.1  0.5  15340 10388 ?        Ss   11:42   0:00 sshd-session: loren [priv]
+loren      72686  0.1  0.4  15568  7824 ?        S    11:42   0:00 sshd-session: loren@pts/0
+```
+    - grep -i root [-A][-B][-C]5 /etc/ssh/sshd_config
+        - En este caso lo que nos va a devolver, dependerá de la opción que elijamos: -A, -B o -C. -A5 devolverá las siguientes 5 líneas tras el resultado, -B5 devolverá las 5 anteriores, y -C5 devolverá ambos, tanto las 5 siguientes como las 5 anteriores. En este caso "-i" nos indica que no distingue entre mayúsculas y minúsculas.
+    - grep -Rl root * 2>/dev/null
+        - Hará una búsqueda recursiva en subdirectorios, y el "-l" hará que simplemente se listen los nombres de los resultados sin la coincidencia de "root", por ejemplo:
+
+```
+[root@rhel-control loren]# grep -R root * 2>/dev/null | tail -n 5
+find/contents/passwd:operator:x:11:0:operator:/root:/usr/sbin/nologin
+find/contents/services:rootd           1094/tcp                # ROOTD
+find/contents/services:rootd           1094/udp                # ROOTD
+find/contents/shadow:root:$y$j9T$z2ULdilnd5bgkT.3ZkntAF1m$yTGkeEFkZXFZjkK5r5jBBtCk6bcKcuD84jhUIm.hEq/::0:99999:7:::
+find/contents/gshadow-:root:::
+[root@rhel-control loren]# grep -Rl root * 2>/dev/null | tail -n 5
+find/contents/passwd
+find/contents/services
+find/contents/shadow
+find/contents/gshadow-
+myarchive
+```
 
 ## Comandos nuevos
 
